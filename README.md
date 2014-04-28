@@ -4,14 +4,14 @@ This program is free software distributed under the terms of the Apache License,
 
 Introduction
 ============
-This program generates random synthetic data akin to Bongard problems for ILP learning. Each example is a "picture" composed of simple geometrical objects (elements). An object can be one of the three shapes: circle, square and triangle. A triangle may be pointing up or down. Each picture cannot have a pair of partially overlapped objects and all objects must be fully enclosed in the boundary of the picture.
+This program generates random synthetic data akin to Bongard problems for ILP learning. Each example is a "picture" composed of simple geometrical objects (elements). An object can be one of the three shapes: circle, square and triangle. A triangle may be pointing up or down. Two restrictions enforced when creating the data: 1) Each picture cannot have a pair of partially overlapped objects; 2) All objects must be fully enclosed in the boundary of the picture specified in Configurations.hpp.
 
 
 Compilation
 ============
 The program is built using CMake on all platforms.
 
-On most systems you can compile the code as simple as
+On most systems you can compile the code as simplely as
 
 	$ mkdir build && cd build
 	$ cmake -DCMAKE_BUILD_TYPE=Release ..
@@ -41,4 +41,4 @@ Since generating a large dataset takes very long time, the program periodically 
 * inside, north, east. The three files contain pairs of objects for three position relationships.
 * summary. This file gives the configuration parameters and the maximum picture/object IDs in the current directory.
 
-Given some target clauses, in order to generate a training set for ILP systems, one can first load the files into a RDBMS and execute queries for target clauses.
+Given some target clauses, in order to generate a training set for ILP systems, one can first load the files into a RDBMS and execute queries for target clauses for positive training examples. Additional work is needed to generate specific formats.
