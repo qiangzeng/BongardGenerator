@@ -1,4 +1,5 @@
-/**Copyright 2014 UW-Madison, Database Group
+/**
+ * Copyright 2014 UW-Madison, Database Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +26,19 @@ typedef long long unsigned int id_type;
 
 /** The chunk size of pictures stored in one fold */
 #define CUTOFF 1000000
+
 /** Print the progress whenever a multiplier number of picture is generated. */
 #define PRINT_GRAN 5000
+
 /** The length and the width of the picture. */
 #define BOUND 100
-/** The minimum horizontal/vertical separate space between two elements and between the element and the picture boundary. */
+
+/** The minimum horizontal/vertical separate space between two elements and
+ * between the element and the picture boundary.
+ */
 #define MARGIN 2
+
 /** The maximum number of trials in generating an element. */
 #define MAX_TRY 100000000
-
 
 #endif /* CONFIGURATIONS_HPP_ */
