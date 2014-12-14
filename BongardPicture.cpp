@@ -32,7 +32,7 @@ bool BongardPicture::isValid(BongardElement *check) const {
   if (check->overflow()) {
     return false;
   }
-  for (auto &elem : elems_) {
+  for (const std::unique_ptr<BongardElement> &elem : elems_) {
     if (elem->conflict(check)) {
       return false;
     }
@@ -124,7 +124,7 @@ bool BongardElement::isNorthOf(const BongardElement *other) const {
 }
 
 bool BongardElement::overflow() const {
-  auto &tp = getOuterBoundRect().getRightTop();
+  const Point &tp = getOuterBoundRect().getRightTop();
   return tp.x_ >= BOUND || tp.y_ >= BOUND;
 }
 
@@ -224,7 +224,7 @@ void BongardElement::setId(id_type id) { id_ = id; }
 
 void BongardPicture::assignIDs(id_type &pid, id_type &eid) {
   id_ = pid++;
-  for (auto &elm : elems_) {
+  for (std::unique_ptr<BongardElement> &elm : elems_) {
     elm->setId(eid++);
   }
 }
@@ -232,20 +232,20 @@ void BongardPicture::assignIDs(id_type &pid, id_type &eid) {
 void BongardPicture::output(FILE *elem, FILE *circle, FILE *rec, FILE *tri,
                             FILE *tri_up, FILE *tri_down, FILE *inside,
                             FILE *north, FILE *east) {
-  for (auto &e : elems_) {
+  for (const std::unique_ptr<BongardElement> &e : elems_) {
     fprintf(elem, "%llu|%llu\n", id_, e->id_);
     e->output(circle, rec, tri, tri_up, tri_down);
   }
 
-  for (auto &pair : inside_) {
+  for (const std::pair<BongardElement *, BongardElement *> &pair : inside_) {
     fprintf(inside, "%llu|%llu\n", pair.first->id_, pair.second->id_);
   }
 
-  for (auto &pair : north_) {
+  for (std::pair<BongardElement *, BongardElement *> &pair : north_) {
     fprintf(north, "%llu|%llu\n", pair.first->id_, pair.second->id_);
   }
 
-  for (auto &pair : east_) {
+  for (std::pair<BongardElement *, BongardElement *> &pair : east_) {
     fprintf(east, "%llu|%llu\n", pair.first->id_, pair.second->id_);
   }
 }

@@ -88,10 +88,15 @@ void BongardGenerator::output() {
     std::cout << "Created directory " << dir.string() << "." << std::endl;
   }
 
-  std::string elem_rel = "element", circle_rel = "circle",
-              rec_rel = "rectangle", tri_rel = "triangle",
-              tri_down_rel = "triangle_down", tri_up_rel = "triangle_up";
-  std::string east_rel = "east", north_rel = "north", inside = "inside";
+  const std::string elem_rel = "element";
+  const std::string circle_rel = "circle";
+  const std::string rec_rel = "rectangle";
+  const std::string tri_rel = "triangle";
+  const std::string tri_down_rel = "triangle_down";
+  const std::string tri_up_rel = "triangle_up";
+  const std::string east_rel = "east";
+  const std::string north_rel = "north";
+  const std::string inside = "inside";
 
   FILE *elem_file = fopen((dir / elem_rel).c_str(), "w");
   FILE *rect_file = fopen((dir / rec_rel).c_str(), "w");
@@ -103,7 +108,7 @@ void BongardGenerator::output() {
   FILE *north_file = fopen((dir / north_rel).c_str(), "w");
   FILE *inside_file = fopen((dir / inside).c_str(), "w");
 
-  for (auto &picture : pictures_) {
+  for (const std::unique_ptr<BongardPicture> &picture : pictures_) {
     picture->output(elem_file, circle_file, rect_file, tri_file, tri_up_file,
                     tri_down_file, inside_file, north_file, east_file);
   }
