@@ -182,7 +182,7 @@ BongardSquare::BongardSquare(int x, int y, int w)
 
 BongardTriangle::BongardTriangle(int x, int y, int width, bool up)
     : BongardElement(-1), leftBottom_(x, y), w_(width), point_orientation_(up) {
-  int height = (int)std::ceil((float)(width * sqrt(3) / 2.0));
+  int height = std::ceil(width * std::sqrt(3) / 2.0);
   setOuterBoundRect(x, y, width, height);
 
   int inner_width = height * width / (height + width);
